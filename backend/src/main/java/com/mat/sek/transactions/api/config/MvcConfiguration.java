@@ -1,4 +1,4 @@
-package in.keepgrowing.springbootangularscaffolding.config;
+package com.mat.sek.transactions.api.config;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

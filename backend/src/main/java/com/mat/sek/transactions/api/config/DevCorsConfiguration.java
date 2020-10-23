@@ -1,4 +1,4 @@
-package in.keepgrowing.springbootangularscaffolding.config;
+package com.mat.sek.transactions.api.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,6 +11,6 @@ public class DevCorsConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**").allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
+        registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
     }
 }

@@ -9,8 +9,8 @@
 	<description>The frontend module built with Angular</description>
 
 	<parent>
-		<artifactId>spring-boot-angular-scaffolding</artifactId>
-		<groupId>in.keepgrowing</groupId>
+		<artifactId>csv-transactions-viewer</artifactId>
+		<groupId>com.mat.sek</groupId>
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
