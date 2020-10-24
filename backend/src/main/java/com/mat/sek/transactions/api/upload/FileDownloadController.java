@@ -29,7 +29,7 @@ public class FileDownloadController {
         this.fileSystemStorageService = fileSystemStorageService;
     }
 
-    @GetMapping("{type}/file/{fileName:.+}")
+    @GetMapping("/file/{type}/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable CsvFileType type, @PathVariable String fileName, HttpServletRequest request) {
         Resource resource = fileSystemStorageService.loadAsResource(type.name(), fileName);
         String contentType = null;
@@ -48,12 +48,12 @@ public class FileDownloadController {
                 .body(resource);
     }
 
-    @GetMapping("{type}/file/last")
+    @GetMapping("/file/{type}/last")
     public ResponseEntity<FileUploadResponse> lastLoadedFile(@PathVariable CsvFileType type, HttpServletRequest request) {
         Resource resource = fileSystemStorageService.getLastLoaded(type.name());
         if (resource != null && resource.exists()) {
             String fileName = resource.getFilename();
-            String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name(), fileName);
+            String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name().toLowerCase(), fileName);
             return new ResponseEntity<>(
                     new FileUploadResponse(fileName, fileDownloadUri),
                     HttpStatus.OK

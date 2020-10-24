@@ -40,8 +40,8 @@ export class CsvUploadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.url = `${environment.apiUrl}${this.uploadType}`;
-    this.csvUploadService.currentLoadedFile(this.url)
+    this.url = `${environment.apiUrl}file/${this.uploadType}`;
+    this.csvUploadService.currentLoadedFile(this.uploadType)
     .pipe(take(1))
     .subscribe(file => {
       this.loadedFile = file;

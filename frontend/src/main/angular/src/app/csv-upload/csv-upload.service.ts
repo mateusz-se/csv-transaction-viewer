@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { UploadedFileInfo } from './csv-upload.component';
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,8 +21,8 @@ export class CsvUploadService {
       .pipe(filter(event => event instanceof HttpResponse));
   }
 
-  currentLoadedFile(url: string) {
-    return this.httpClient.get<UploadedFileInfo>(`${url}/file/last`);
+  currentLoadedFile(type: string) {
+    return this.httpClient.get<UploadedFileInfo>(`${environment.apiUrl}/file/${type}/last`);
   }
 
 }

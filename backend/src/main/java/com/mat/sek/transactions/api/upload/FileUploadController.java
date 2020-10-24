@@ -28,13 +28,13 @@ public class FileUploadController {
         this.uploadHandlerService = uploadHandlerService;
     }
 
-    @PostMapping("/{type}/upload")
+    @PostMapping("/file/{type}")
     public FileUploadResponse uploadFile(@PathVariable CsvFileType type, @RequestParam("file") MultipartFile file) throws IOException {
         LOGGER.info("Starting {} file upload", type.name());
         Resource loadedFile = storageService.store(type.name(), file);
         uploadHandlerService.handle(type, loadedFile.getFile().toPath());
         String fileName = Objects.requireNonNull(loadedFile.getFilename());
-        String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name(), fileName);
+        String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name().toLowerCase(), fileName);
         LOGGER.info("Uploaded file {}", fileName);
         return new FileUploadResponse(fileName, fileDownloadUri);
     }
