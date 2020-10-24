@@ -1,0 +1,27 @@
+<nz-table
+      nzShowSizeChanger
+      [nzData]="transactions"
+      [nzFrontPagination]="false"
+      [nzLoading]="loading"
+      [nzTotal]="transactionCount$ | async"
+      [nzPageSize]="pageSize"
+      [nzPageIndex]="pageIndex"
+      (nzQueryParams)="onQueryParamsChange($event)"
+    >
+      <thead>
+        <tr>
+          <th nzColumnKey="title">Title</th>
+          <th nzColumnKey="transactionDate">Date</th>
+          <th nzColumnKey="pricePln">Price PLN</th>
+          <th nzColumnKey="priceEur">Price EUR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.title }}</td>
+          <td>{{ transaction.transactionDate }}</td>
+          <td>{{ transaction.pricePln }}</td>
+          <td>{{ transaction.priceEur }}</td>
+        </tr>
+      </tbody>
+    </nz-table>

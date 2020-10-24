@@ -1,0 +1,12 @@
+<nz-upload
+      nzAction="{{url}}/upload"
+      (nzChange)="handleChange($event)"
+      [nzAccept]="'.csv,text/plain'"
+      [nzCustomRequest]="uploadRequest"
+      [nzShowUploadList]="false"
+    >
+      <button nz-button><i nz-icon nzType="upload"></i>Click to Upload</button>
+</nz-upload>
+<span *ngIf="loadedFile">Loaded file is {{loadedFile.name}}
+  <button nz-button nzType="primary" nzShape="round" (click)="downloadFile()"><i nz-icon nzType="download"></i></button>
+</span>
