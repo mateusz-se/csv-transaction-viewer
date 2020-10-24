@@ -1,6 +1,7 @@
-package com.mat.sek.transactions.api.csv;
+package com.mat.sek.transactions.api.handler;
 
-import com.mat.sek.transactions.api.csv.parser.CsvParser;
+import com.mat.sek.transactions.api.csv.Rate;
+import com.mat.sek.transactions.api.csv.CsvParser;
 import com.mat.sek.transactions.api.db.RatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

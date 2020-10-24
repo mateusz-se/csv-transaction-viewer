@@ -1,5 +1,6 @@
-package com.mat.sek.transactions.api.csv;
+package com.mat.sek.transactions.api.handler;
 
+import com.mat.sek.transactions.api.csv.CsvFileType;
 import com.mat.sek.transactions.api.csv.converter.StringToCsvFileTypeConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

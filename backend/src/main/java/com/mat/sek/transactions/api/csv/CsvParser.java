@@ -1,6 +1,5 @@
-package com.mat.sek.transactions.api.csv.parser;
+package com.mat.sek.transactions.api.csv;
 
-import com.mat.sek.transactions.api.csv.TransactionCsvFileHandler;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.slf4j.Logger;
@@ -18,9 +17,9 @@ public class CsvParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvParser.class);
 
-    public <T> List<T> parse(Class<T> clazz,Path file) {
+    public <T> List<T> parse(Class<T> clazz, Path file) {
         try (
-                Reader reader = Files.newBufferedReader(file);
+                Reader reader = Files.newBufferedReader(file)
         ) {
             CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(reader)
                     .withIgnoreLeadingWhiteSpace(true)

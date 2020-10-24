@@ -2,9 +2,6 @@ package com.mat.sek.transactions.api.db;
 
 import com.mat.sek.transactions.api.SearchParams;
 import com.mat.sek.transactions.api.csv.Transaction;
-import com.mat.sek.transactions.api.csv.parser.CsvParser;
-import com.mat.sek.transactions.api.db.model.public_.tables.Rates;
-import com.mat.sek.transactions.api.db.model.public_.tables.Transactions;
 import org.jooq.DSLContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
