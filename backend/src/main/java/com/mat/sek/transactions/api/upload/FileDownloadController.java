@@ -1,12 +1,13 @@
 package com.mat.sek.transactions.api.upload;
 
-import com.mat.sek.transactions.api.CsvFileType;
+import com.mat.sek.transactions.api.csv.CsvFileType;
 import com.mat.sek.transactions.api.upload.storage.FileSystemStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -50,15 +50,19 @@ public class FileDownloadController {
     }
 
     @GetMapping("{type}/file/last")
-    public FileUploadResponse lastLoadedFile(@PathVariable CsvFileType type,HttpServletRequest request) {
+    public ResponseEntity<FileUploadResponse> lastLoadedFile(@PathVariable CsvFileType type,HttpServletRequest request) {
         Resource resource = fileSystemStorageService.getLastLoaded(type.name());
-        String fileName = resource.getFilename();
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(type.name())
-                .path("/file/")
-                .path(fileName)
-                .toUriString();
+        if (resource != null && resource.exists()) {
+            String fileName = resource.getFilename();
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path(type.name())
+                    .path("/file/")
+                    .path(fileName)
+                    .toUriString();
+            return new ResponseEntity<>(new FileUploadResponse(fileName, fileDownloadUri), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        return new FileUploadResponse(fileName, fileDownloadUri);
     }
 }

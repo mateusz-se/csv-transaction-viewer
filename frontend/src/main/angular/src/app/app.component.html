@@ -1,3 +1,16 @@
-<app-csv-upload [uploadType]="UploadType.TRANSACTION"></app-csv-upload>
-<app-csv-upload [uploadType]="UploadType.RATE"></app-csv-upload>
-<app-transactions-table></app-transactions-table>
+<nz-layout>
+  <nz-header><h3 class="white">Csv Transaction Viewer</h3> </nz-header>
+  <nz-content>
+      <div class="padding">
+          <h3>Load transactions</h3>
+          <app-csv-upload [uploadType]="UploadType.TRANSACTION"></app-csv-upload>
+      </div>
+      <div class="padding">
+          <h3>Load rates</h3>
+          <app-csv-upload [uploadType]="UploadType.RATE"></app-csv-upload>
+      </div>
+      <div class="padding">
+          <app-transactions-table></app-transactions-table>
+      </div>
+  </nz-content>
+</nz-layout>

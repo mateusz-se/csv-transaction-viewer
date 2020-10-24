@@ -12,6 +12,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzMessageModule,
     CsvUploadModule,
-    TransactionsTableModule
+    TransactionsTableModule,
+    NzLayoutModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

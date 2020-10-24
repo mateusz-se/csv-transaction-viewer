@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   UploadType = UploadType;
-  title = 'app';
 }

@@ -1,6 +1,5 @@
 package com.mat.sek.transactions.api.csv;
 
-import com.mat.sek.transactions.api.CsvFileType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

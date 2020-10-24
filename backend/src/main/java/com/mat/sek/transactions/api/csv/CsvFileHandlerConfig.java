@@ -1,16 +1,12 @@
-package com.mat.sek.transactions.api.csv.parser;
+package com.mat.sek.transactions.api.csv;
 
-import com.mat.sek.transactions.api.CsvFileType;
-import com.mat.sek.transactions.api.csv.FileHandler;
-import com.mat.sek.transactions.api.csv.RateCsvFileHandler;
-import com.mat.sek.transactions.api.csv.TransactionCsvFileHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
 @Configuration
-public class CsvTypeParserConfig {
+public class CsvFileHandlerConfig {
 
     @Bean
     Map<CsvFileType, FileHandler> parserMap(RateCsvFileHandler rateCsvParser, TransactionCsvFileHandler transactionCsvParser) {

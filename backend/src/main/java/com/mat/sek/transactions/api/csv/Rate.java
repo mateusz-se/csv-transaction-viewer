@@ -18,7 +18,6 @@ public class Rate {
     @CsvDate("yyyy-MM-dd")
     private LocalDate toDate;
 
-    @CsvBindByPosition(position = 2)
-    @CsvNumber("0.0")
+    @CsvBindByPosition(position = 2, format = "#.##")
     private BigDecimal price;
 }

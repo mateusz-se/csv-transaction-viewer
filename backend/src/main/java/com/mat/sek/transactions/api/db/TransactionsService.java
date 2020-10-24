@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.jooq.impl.DSL.round;
+
 @Service
 public class TransactionsService {
     private final DSLContext dsl;
@@ -45,9 +47,9 @@ public class TransactionsService {
         return dsl.select(transactions.ID,
                 transactions.TITLE,
                 transactions.TRANSACTION_DATE,
-                transactions.PRICE.as("pricePln"),
+                round(transactions.PRICE, 2).as("pricePln"),
                 transactions.CURRENCY,
-                transactions.PRICE.multiply(rates.PRICE).as("priceEur")
+                round(transactions.PRICE.multiply(rates.PRICE), 2).as("priceEur")
         )
                 .from(transactions)
                 .leftJoin(rates)
@@ -59,5 +61,12 @@ public class TransactionsService {
                 .limit(searchParams.getResults())
                 .fetch()
                 .into(TransactionDTO.class);
+    }
+
+    public Integer getTransactionsCount() {
+        Transactions transactions = Transactions.TRANSACTIONS;
+        return dsl.selectCount()
+                .from(transactions)
+                .fetchOne(0, Integer.class);
     }
 }

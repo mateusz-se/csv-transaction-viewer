@@ -1,5 +1,6 @@
 package com.mat.sek.transactions.api;
 
+import com.mat.sek.transactions.api.db.TransactionCountDTO;
 import com.mat.sek.transactions.api.db.TransactionDTO;
 import com.mat.sek.transactions.api.db.TransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class TransactionsController {
                 .results(results)
                 .build();
         return transactionsService.getTransactions(searchParams);
+    }
+
+    @GetMapping("transaction/count")
+    public TransactionCountDTO getTransactionsCount() {
+        return new TransactionCountDTO(transactionsService.getTransactionsCount());
     }
 }

@@ -1,7 +1,7 @@
 package com.mat.sek.transactions.api.upload;
 
 
-import com.mat.sek.transactions.api.CsvFileType;
+import com.mat.sek.transactions.api.csv.CsvFileType;
 import com.mat.sek.transactions.api.csv.UploadHandlerService;
 import com.mat.sek.transactions.api.upload.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
