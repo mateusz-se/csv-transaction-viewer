@@ -10,11 +10,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   UploadType = UploadType;
 
-  constructor(private readonly transactionsTableService: TransactionsTableService) {
-    
-  }
+  constructor(private readonly transactionsTableService: TransactionsTableService) { }
 
   uploadedFileChanged(file: UploadedFileInfo) {
-    this.transactionsTableService.transactionUpdate.emit(true);
+    this.transactionsTableService.transactionUpdate.next(true);
   }
 }

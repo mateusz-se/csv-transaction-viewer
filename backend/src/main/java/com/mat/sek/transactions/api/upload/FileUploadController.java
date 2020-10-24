@@ -30,7 +30,7 @@ public class FileUploadController {
 
     @PostMapping("/{type}/upload")
     public FileUploadResponse uploadFile(@PathVariable CsvFileType type, @RequestParam("file") MultipartFile file) throws IOException {
-        LOGGER.info("Starting file {} file upload", type.name());
+        LOGGER.info("Starting {} file upload", type.name());
         Resource loadedFile = storageService.store(type.name(), file);
         uploadHandlerService.handle(type, loadedFile.getFile().toPath());
         String fileName = Objects.requireNonNull(loadedFile.getFilename());
