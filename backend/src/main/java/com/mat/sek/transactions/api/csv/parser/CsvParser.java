@@ -1,7 +1,10 @@
 package com.mat.sek.transactions.api.csv.parser;
 
+import com.mat.sek.transactions.api.csv.TransactionCsvFileHandler;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,6 +15,9 @@ import java.util.List;
 
 @Service
 public class CsvParser {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CsvParser.class);
+
     public <T> List<T> parse(Class<T> clazz,Path file) {
         try (
                 Reader reader = Files.newBufferedReader(file);
@@ -23,7 +29,7 @@ public class CsvParser {
 
             return csvToBean.parse();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Error parsing file", e);
         }
         return List.of();
     }

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -21,9 +20,9 @@ import java.io.IOException;
 @RestController
 public class FileDownloadController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FileDownloadController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileDownloadController.class);
 
-    private FileSystemStorageService fileSystemStorageService;
+    private final FileSystemStorageService fileSystemStorageService;
 
     @Autowired
     public FileDownloadController(FileSystemStorageService fileSystemStorageService) {
@@ -37,7 +36,7 @@ public class FileDownloadController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
-            logger.info("Could not determine file type.");
+            LOGGER.info("Could not determine file type.");
         }
         if (contentType == null) {
             contentType = "application/octet-stream";
@@ -50,16 +49,15 @@ public class FileDownloadController {
     }
 
     @GetMapping("{type}/file/last")
-    public ResponseEntity<FileUploadResponse> lastLoadedFile(@PathVariable CsvFileType type,HttpServletRequest request) {
+    public ResponseEntity<FileUploadResponse> lastLoadedFile(@PathVariable CsvFileType type, HttpServletRequest request) {
         Resource resource = fileSystemStorageService.getLastLoaded(type.name());
         if (resource != null && resource.exists()) {
             String fileName = resource.getFilename();
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path(type.name())
-                    .path("/file/")
-                    .path(fileName)
-                    .toUriString();
-            return new ResponseEntity<>(new FileUploadResponse(fileName, fileDownloadUri), HttpStatus.OK);
+            String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name(), fileName);
+            return new ResponseEntity<>(
+                    new FileUploadResponse(fileName, fileDownloadUri),
+                    HttpStatus.OK
+            );
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
