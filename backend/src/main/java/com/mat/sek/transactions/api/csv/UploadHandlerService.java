@@ -5,19 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class CsvHandlerService {
-    private final Map<CsvFileType, Parser> parserMap;
+public class UploadHandlerService {
+    private final Map<CsvFileType, FileHandler> handlerMap;
 
     @Autowired
-    public CsvHandlerService(Map<CsvFileType, Parser> parserMap) {
-        this.parserMap = parserMap;
+    public UploadHandlerService(Map<CsvFileType, FileHandler> handlerMap) {
+        this.handlerMap = handlerMap;
     }
 
     public void handle(CsvFileType type, Path path) {
-        this.parserMap.get(type).parse(path);
+        this.handlerMap.get(type).handle(path);
     }
 }

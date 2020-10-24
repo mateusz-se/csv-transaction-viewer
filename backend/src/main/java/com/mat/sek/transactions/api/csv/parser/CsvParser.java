@@ -1,4 +1,4 @@
-package com.mat.sek.transactions.api.csv;
+package com.mat.sek.transactions.api.csv.parser;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
