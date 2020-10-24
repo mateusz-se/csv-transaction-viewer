@@ -54,12 +54,10 @@ public class FileDownloadController {
         if (resource != null && resource.exists()) {
             String fileName = resource.getFilename();
             String fileDownloadUri = FileDownloadUtil.buildFileDownloadUrl(type.name().toLowerCase(), fileName);
-            return new ResponseEntity<>(
-                    new FileUploadResponse(fileName, fileDownloadUri),
-                    HttpStatus.OK
-            );
+            return ResponseEntity.ok()
+                    .body(new FileUploadResponse(fileName, fileDownloadUri));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
 
     }
