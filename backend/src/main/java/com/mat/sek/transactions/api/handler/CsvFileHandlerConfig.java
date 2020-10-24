@@ -18,9 +18,9 @@ public class CsvFileHandlerConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    Map<CsvFileType, FileHandler> parserMap(RateCsvFileHandler rateCsvParser, TransactionCsvFileHandler transactionCsvParser) {
+    Map<CsvFileType, FileHandler> parserMap(RateCsvFileHandler rateCsvFileHandler, TransactionCsvFileHandler transactionCsvFileHandler) {
         return Map.of(
-                CsvFileType.RATE, rateCsvParser,
-                CsvFileType.TRANSACTION, transactionCsvParser);
+                CsvFileType.RATE, rateCsvFileHandler,
+                CsvFileType.TRANSACTION, transactionCsvFileHandler);
     }
 }
