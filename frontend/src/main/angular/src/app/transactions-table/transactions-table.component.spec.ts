@@ -5,7 +5,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { TransactionsTableComponent } from './transactions-table.component';
 import { of } from 'rxjs';
 
-fdescribe('TransactionsTableComponent', () => {
+describe('TransactionsTableComponent', () => {
   let component: TransactionsTableComponent;
   let fixture: ComponentFixture<TransactionsTableComponent>;
 
