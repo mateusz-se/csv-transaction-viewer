@@ -1,28 +1,26 @@
 package com.mat.sek.transactions.api.db;
 
 import com.mat.sek.transactions.api.csv.Rate;
-import com.mat.sek.transactions.api.csv.Transaction;
-import com.mat.sek.transactions.api.db.model.public_.tables.Rates;
-import com.mat.sek.transactions.api.db.model.public_.tables.Transactions;
 import org.jooq.DSLContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.mat.sek.transactions.api.db.model.public_.tables.Rates.RATES;
 
-@Service
-public class RatesService {
+@Repository
+public class RatesRepository {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RatesService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RatesRepository.class);
 
     private final DSLContext dsl;
 
     @Autowired
-    public RatesService(DSLContext dsl) {
+    public RatesRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 

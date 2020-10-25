@@ -2,7 +2,7 @@ package com.mat.sek.transactions.api.handler;
 
 import com.mat.sek.transactions.api.csv.Transaction;
 import com.mat.sek.transactions.api.csv.CsvParser;
-import com.mat.sek.transactions.api.db.TransactionsService;
+import com.mat.sek.transactions.api.db.TransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +13,19 @@ import java.util.List;
 public class TransactionCsvFileHandler implements FileHandler {
 
     private final CsvParser csvParser;
-    private final TransactionsService transactionsService;
+    private final TransactionsRepository transactionsRepository;
 
 
     @Autowired
-    public TransactionCsvFileHandler(CsvParser csvParser, TransactionsService transactionsService) {
+    public TransactionCsvFileHandler(CsvParser csvParser, TransactionsRepository transactionsRepository) {
         this.csvParser = csvParser;
-        this.transactionsService = transactionsService;
+        this.transactionsRepository = transactionsRepository;
     }
 
     @Override
     public void handle(Path file) {
         List<Transaction> transactions = this.csvParser.parse(Transaction.class, file);
-        transactionsService.removeAll();
-        transactionsService.insert(transactions);
+        transactionsRepository.removeAll();
+        transactionsRepository.insert(transactions);
     }
 }

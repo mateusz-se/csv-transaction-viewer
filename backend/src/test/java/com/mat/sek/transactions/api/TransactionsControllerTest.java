@@ -1,7 +1,7 @@
 package com.mat.sek.transactions.api;
 
 import com.mat.sek.transactions.api.db.TransactionDTO;
-import com.mat.sek.transactions.api.db.TransactionsService;
+import com.mat.sek.transactions.api.db.TransactionsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class TransactionsControllerTest {
 
     @MockBean
-    private TransactionsService transactionsService;
+    private TransactionsRepository transactionsRepository;
     @Autowired
     private MockMvc mvc;
 
@@ -34,7 +34,7 @@ class TransactionsControllerTest {
                 createTransaction(1, "title 1"),
                 createTransaction(2, "title 2"));
 
-        when(transactionsService.getTransactions(searchParams)).thenReturn(transactions);
+        when(transactionsRepository.getTransactions(searchParams)).thenReturn(transactions);
 
         mvc.perform(MockMvcRequestBuilders.get("/transaction?page=1&results=50"))
                 .andExpect(status().isOk())
@@ -45,7 +45,7 @@ class TransactionsControllerTest {
 
     @Test
     void getTransactionsCount() throws Exception {
-        when(transactionsService.getTransactionsCount()).thenReturn(5);
+        when(transactionsRepository.getTransactionsCount()).thenReturn(5);
 
         mvc.perform(MockMvcRequestBuilders.get("/transaction/count"))
                 .andExpect(status().isOk())

@@ -2,20 +2,16 @@ package com.mat.sek.transactions.api.handler;
 
 import com.mat.sek.transactions.api.csv.CsvParser;
 import com.mat.sek.transactions.api.csv.Transaction;
-import com.mat.sek.transactions.api.db.TransactionDTO;
-import com.mat.sek.transactions.api.db.TransactionsService;
+import com.mat.sek.transactions.api.db.TransactionsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,7 +22,7 @@ class TransactionCsvFileHandlerTest {
     private CsvParser csvParser;
 
     @Mock
-    private TransactionsService transactionsService;
+    private TransactionsRepository transactionsRepository;
 
     @InjectMocks
     private TransactionCsvFileHandler transactionCsvFileHandler;
@@ -40,8 +36,8 @@ class TransactionCsvFileHandlerTest {
                 transactions
         );
         transactionCsvFileHandler.handle(pathToCsvFile);
-        verify(transactionsService, times(1)).removeAll();
-        verify(transactionsService, times(1)).insert(transactions);
+        verify(transactionsRepository, times(1)).removeAll();
+        verify(transactionsRepository, times(1)).insert(transactions);
     }
 
     private Transaction createTransaction(int id, String title) {

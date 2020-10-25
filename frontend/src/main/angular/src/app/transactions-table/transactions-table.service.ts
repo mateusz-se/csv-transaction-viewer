@@ -17,16 +17,13 @@ export interface Transaction {
   providedIn: 'root'
 })
 export class TransactionsTableService {
-  transactionUrl = `${environment.apiUrl}transaction`;
+  transactionUrl = `${environment.apiUrl}transactions`;
 
   transactionUpdate = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
-  getTransactions(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<Transaction[]> {
+  getTransactions(pageIndex: number, pageSize: number): Observable<Transaction[]> {
     const params = new HttpParams()
       .append('page', `${pageIndex}`)
       .append('results', `${pageSize}`);

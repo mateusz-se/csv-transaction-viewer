@@ -11,10 +11,9 @@ import java.math.BigDecimal;
 public class TextToPriceConverter extends AbstractBeanField {
     @Override
     protected Object convert(String value) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
-        Price p = new Price();
         int index = value.lastIndexOf(" ");
-        p.setAmount(new BigDecimal(value.substring(0, index)));
-        p.setCurrency(value.substring(index + 1));
-        return p;
+        BigDecimal amount = new BigDecimal(value.substring(0, index));
+        String currency = value.substring(index + 1);
+        return new Price(amount, currency);
     }
 }

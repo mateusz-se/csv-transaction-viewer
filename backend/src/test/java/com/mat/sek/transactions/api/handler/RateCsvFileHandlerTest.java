@@ -2,8 +2,7 @@ package com.mat.sek.transactions.api.handler;
 
 import com.mat.sek.transactions.api.csv.CsvParser;
 import com.mat.sek.transactions.api.csv.Rate;
-import com.mat.sek.transactions.api.csv.Transaction;
-import com.mat.sek.transactions.api.db.RatesService;
+import com.mat.sek.transactions.api.db.RatesRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ class RateCsvFileHandlerTest {
     private CsvParser csvParser;
 
     @Mock
-    private RatesService ratesService;
+    private RatesRepository ratesRepository;
 
     @InjectMocks
     private RateCsvFileHandler rateCsvFileHandler;
@@ -38,8 +37,8 @@ class RateCsvFileHandlerTest {
                 rates
         );
         rateCsvFileHandler.handle(pathToCsvFile);
-        verify(ratesService, times(1)).removeAll();
-        verify(ratesService, times(1)).insert(rates);
+        verify(ratesRepository, times(1)).removeAll();
+        verify(ratesRepository, times(1)).insert(rates);
     }
 
     private Rate createRate(double price) {
