@@ -1,6 +1,7 @@
 <nz-table
       nzShowSizeChanger
-      [nzData]="transactions"
+      #transactionsTable
+      [nzData]="transactions$ | async"
       [nzFrontPagination]="false"
       [nzLoading]="loading"
       [nzTotal]="transactionCount$ | async"
@@ -17,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let transaction of transactions">
+        <tr *ngFor="let transaction of transactionsTable.data">
           <td>{{ transaction.title }}</td>
           <td>{{ transaction.transactionDate }}</td>
           <td>{{ transaction.pricePln }}</td>
