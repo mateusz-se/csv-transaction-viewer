@@ -36,7 +36,7 @@ describe('CsvUploadService', () => {
       done();
     });
 
-    const req = httpMock.expectOne(`${environment.apiUrl}/file/${type}/last`);
+    const req = httpMock.expectOne(`${environment.apiUrl}file/${type}/last`);
     expect(req.request.method).toBe('GET');
     req.flush(expectedFileInfo);
   });

@@ -10,14 +10,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Service
-public class TransactionCsvFileHandler implements FileHandler {
+class TransactionCsvFileHandler implements FileHandler {
 
     private final CsvParser csvParser;
     private final TransactionsRepository transactionsRepository;
 
 
     @Autowired
-    public TransactionCsvFileHandler(CsvParser csvParser, TransactionsRepository transactionsRepository) {
+    TransactionCsvFileHandler(CsvParser csvParser, TransactionsRepository transactionsRepository) {
         this.csvParser = csvParser;
         this.transactionsRepository = transactionsRepository;
     }
