@@ -31,7 +31,8 @@ public class TransactionsRepository {
     public void insert(List<Transaction> transactionList) {
         LOGGER.info("Inserting {} transactions", transactionList.size());
         // TODO change to batch insert
-        transactionList.forEach(v -> dsl.insertInto(TRANSACTIONS, TRANSACTIONS.ID,
+        transactionList.forEach(v -> dsl.insertInto(TRANSACTIONS,
+                TRANSACTIONS.ID,
                 TRANSACTIONS.TITLE,
                 TRANSACTIONS.TRANSACTION_DATE,
                 TRANSACTIONS.PRICE,
