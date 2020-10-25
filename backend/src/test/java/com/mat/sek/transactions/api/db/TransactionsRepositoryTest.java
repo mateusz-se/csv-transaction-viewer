@@ -119,7 +119,7 @@ class TransactionsRepositoryTest {
 
         assertEquals(1, transactions.size());
         TransactionDTO transactionDTO = transactions.get(0);
-        assertEquals(plnPrice.divide(eurPrice, new MathContext(2, RoundingMode.HALF_UP)), transactionDTO.getPriceEur());
+        assertEquals(plnPrice.divide(eurPrice, new MathContext(3, RoundingMode.HALF_UP)), transactionDTO.getPriceEur());
         assertEquals(BigDecimal.valueOf(10.21d), transactionDTO.getPricePln());
         assertEquals(2, transactionDTO.getId());
     }

@@ -4,15 +4,24 @@ You can load transactions and rates csv files and display them in a table.
 
 Example data can be found in mock-data folder
 
+## To Run with docker
+```bash
+$ mvn clean install
+$ docker-compose build
+$ docker-compose up
+```
+
+go to http://localhost/
+
 ## To Run in development
 
-###frontend
+### frontend
 ```bash
 $ cd frontend/src/main/angular
 $ npm i
 $ npm run start
 ```
-###backend
+### backend
 ```bash
 $ cd backend
 $ mvn clean install

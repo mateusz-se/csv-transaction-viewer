@@ -24,7 +24,7 @@ export class CsvUploadService {
   }
 
   currentLoadedFile(type: UploadType): Observable<UploadedFileInfo> {
-    return this.httpClient.get<UploadedFileInfo>(`${environment.apiUrl}/file/${type}/last`);
+    return this.httpClient.get<UploadedFileInfo>(`${environment.apiUrl}file/${type}/last`);
   }
 
 }

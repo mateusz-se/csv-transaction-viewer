@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  backend-service:
+    restart: always
+    container_name: backend-service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    networks:
+      - app-network
+
+
+  frontend-nginx:
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
