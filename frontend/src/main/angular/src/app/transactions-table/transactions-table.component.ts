@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TransactionsTableService, Transaction } from './transactions-table.service';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ReplaySubject, of } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap, switchMap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transactions-table',
@@ -20,8 +20,10 @@ export class TransactionsTableComponent implements OnInit, OnDestroy {
   constructor(private transactionsTableService: TransactionsTableService) {}
 
   ngOnInit(): void {
-    this.transactionsTableService.transactionUpdate
-    .pipe(takeUntil(this.destroyed$))
+    this.transactionsTableService.getUpdateTransactions()
+    .pipe(
+      takeUntil(this.destroyed$)
+    )
     .subscribe(() => {
       this.loadDataFromServer(this.pageIndex, this.pageSize);
       this.transactionCount$ = this.transactionsTableService.getTransactionCount();
@@ -36,12 +38,13 @@ export class TransactionsTableComponent implements OnInit, OnDestroy {
   loadDataFromServer(pageIndex: number, pageSize: number): void {
     this.loading = true;
     this.transactionsTableService.getTransactions(pageIndex, pageSize)
-    .pipe(takeUntil(this.destroyed$))
-    .subscribe(data => {
-      this.loading = false;
-      this.transactions = data;
-    });
+    .pipe(
+      takeUntil(this.destroyed$),
+      finalize(() => this.loading = false)
+    )
+    .subscribe(data => this.transactions = data);
   }
+
 
   onQueryParamsChange({ pageSize, pageIndex }: NzTableQueryParams): void {
     this.loadDataFromServer(pageIndex, pageSize);

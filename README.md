@@ -1,24 +1,32 @@
-To learn how to set up a project like this one, check out the [Integrate Angular with a Spring Boot project](http://keepgrowing.in/java/springboot/integrate-angular-with-a-spring-boot-project/) post.
+This project is created for recruitment purposes.
 
-This project is a multi-module application, using the following frameworks: Spring Boot for the backend and Angular for the frontend. The project can be built into a single jar file using Maven.
+You can load transactions and rates csv files and display them in a table.
 
-## Getting Started
+Example data can be found in mock-data folder
 
-To clone the repository, run in the command line:
+## To Run in development
+
+###frontend
 ```bash
-$ git clone https://github.com/little-pinecone/spring-boot-angular-scaffolding.git
+$ cd frontend/src/main/angular
+$ npm i
+$ npm run start
 ```
-
-You can build the application with:
+###backend
 ```bash
+$ cd backend
 $ mvn clean install
+$ java -jar target/backend-1.0.2-SNAPSHOT.jar
 ```
 
 ## Built With
 
 * [Maven](https://maven.apache.org/)
 * [Spring Boot 2.1.5](https://start.spring.io/)
+* [JOOQ](https://www.jooq.org/)
+* [H2 Database](https://www.h2database.com/html/main.html)
 * [Angular 10](https://angular.io/)
+* [NgZorro](https://ng.ant.design/)
 * [frontend-maven-plugin](https://github.com/eirslett/frontend-maven-plugin) ([npm 6.13.7](https://github.com/npm/cli), [Node.js v12.14.1](https://nodejs.org/dist/latest-v12.x/docs/api/))
 
 ## License

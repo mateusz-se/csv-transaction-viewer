@@ -17,9 +17,9 @@ export interface Transaction {
   providedIn: 'root'
 })
 export class TransactionsTableService {
-  transactionUrl = `${environment.apiUrl}transactions`;
+  private readonly transactionUrl = `${environment.apiUrl}transactions`;
 
-  transactionUpdate = new BehaviorSubject<boolean>(false);
+  private readonly transactionUpdate = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -35,4 +35,11 @@ export class TransactionsTableService {
       .pipe(map(c => c.count));
   }
 
+  updateTranasctions(): void {
+    this.transactionUpdate.next(true);
+  }
+
+  getUpdateTransactions(): Observable<boolean> {
+    return this.transactionUpdate.asObservable();
+  }
 }

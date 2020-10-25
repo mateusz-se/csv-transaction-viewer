@@ -36,7 +36,7 @@ class TransactionsControllerTest {
 
         when(transactionsRepository.getTransactions(searchParams)).thenReturn(transactions);
 
-        mvc.perform(MockMvcRequestBuilders.get("/transaction?page=1&results=50"))
+        mvc.perform(MockMvcRequestBuilders.get("/transactions?page=1&results=50"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andReturn();
@@ -47,7 +47,7 @@ class TransactionsControllerTest {
     void getTransactionsCount() throws Exception {
         when(transactionsRepository.getTransactionsCount()).thenReturn(5);
 
-        mvc.perform(MockMvcRequestBuilders.get("/transaction/count"))
+        mvc.perform(MockMvcRequestBuilders.get("/transactions/count"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("count", is(5)))
                 .andReturn();

@@ -10,15 +10,11 @@ import {
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UploadType } from './upload-type';
 
 export interface UploadedFileInfo {
-  name: string;ó
+  name: string;
   url: string;
-}
-
-export enum UploadType {
-  TRANSACTION = 'transaction',
-  RATE = 'rate',
 }
 
 @Component({
@@ -27,10 +23,8 @@ export enum UploadType {
   styleUrls: ['./csv-upload.component.scss'],
 })
 export class CsvUploadComponent implements OnInit {
-  @Input() uploadType: string;
+  @Input() uploadType: UploadType;
   @Output() uploadSuccessful = new EventEmitter<UploadedFileInfo>();
-
-  url: string;
 
   loadedFile: UploadedFileInfo = null;
 
@@ -40,7 +34,6 @@ export class CsvUploadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.url = `${environment.apiUrl}file/${this.uploadType}`;
     this.csvUploadService.currentLoadedFile(this.uploadType)
     .pipe(take(1))
     .subscribe(file => {
@@ -49,9 +42,9 @@ export class CsvUploadComponent implements OnInit {
   }
 
   uploadRequest = (item: NzUploadXHRArgs) => {
-    return this.csvUploadService.uploadFile(item.action, item.file).subscribe(
-      (event: HttpResponse<{}>) => {
-        this.loadedFile = event.body as UploadedFileInfo;
+    return this.csvUploadService.uploadFile(this.uploadType, item.file).subscribe(
+      (event: HttpResponse<UploadedFileInfo>) => {
+        this.loadedFile = event.body;
         item.onSuccess(event.body, item.file, event);
         this.uploadSuccessful.emit(this.loadedFile);
       },

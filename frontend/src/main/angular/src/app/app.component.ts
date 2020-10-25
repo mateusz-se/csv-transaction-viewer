@@ -1,5 +1,6 @@
+import { UploadType } from './csv-upload/upload-type';
 import { TransactionsTableService } from './transactions-table/transactions-table.service';
-import { UploadType, UploadedFileInfo } from './csv-upload/csv-upload.component';
+import { UploadedFileInfo } from './csv-upload/csv-upload.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -13,6 +14,6 @@ export class AppComponent {
   constructor(private readonly transactionsTableService: TransactionsTableService) { }
 
   uploadedFileChanged(file: UploadedFileInfo) {
-    this.transactionsTableService.transactionUpdate.next(true);
+    this.transactionsTableService.updateTranasctions();
   }
 }
