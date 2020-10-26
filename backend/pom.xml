@@ -65,7 +65,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>in.keepgrowing</groupId>
+			<groupId>com.mat.sek</groupId>
 			<artifactId>frontend</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
